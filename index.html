@@ -12,6 +12,26 @@
     <script type="text/babel" src="./script.js"></script>
 
     <script type="text/babel">
+
+        function Modal({
+            title,
+            content,
+            show = false,
+            onClose = () => { },
+            onConfirm = () => { }
+        }) {
+            return show && ReactDOM.createPortal(
+                <div className="modal-container">
+                    <div className="modal">
+                        <h2>{title}</h2>
+                        <p>{content}</p>
+                        <button onClick={onClose}>Annulla</button>
+                        <button onClick={onConfirm}>Conferma</button>
+                    </div>
+                </div>,
+                document.body
+            );
+        }
         function Animali() {
 
 
@@ -33,24 +53,31 @@
 
             const [animals, setAnimals] = useState([]);
 
-            const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
+            const [show, setShow] = useState(false);
+
+            const [animalName, setAnimalName] = useState('');
+
+
 
             // funzione per aggiungere animali random
             function addAnimal() {
-                const randomIndex = Math.floor(Math.random() * animalsChoices.length);
-                const newAnimal = animalsChoices[randomIndex];
-                setAnimals([...animals, newAnimal]);
+
+                if (!animalName) return
+                setAnimals(curr => [...curr, animalName]);
+                setAnimalName('');
+                setShow(false);;
             }
 
             return (
                 <>
-                    <button onClick={addAnimal}>Aggiungi animale</button>
+
+                    <button onClick={() => setShow(true)}>Aggiungi animale</button>
 
                     <details>
                         <summary>Animali</summary>
                         <ul>
                             {animals.map((animal, index) =>
-                                <li key="index">
+                                <li key={index}>
                                     {animal}
                                 </li>)}
 
@@ -58,6 +85,21 @@
 
 
                     </details>
+
+
+                    <Modal
+                        show={show}
+                        onClose={() => setShow(false)}
+                        onConfirm={addAnimal}
+                        title="Aggiungi animale"
+                        content={
+                            <input
+                                type="text"
+                                value={animalName}
+                                onChange={e => setAnimalName(e.target.value)}
+                            />
+                        }
+                    />
 
                 </>
             )
