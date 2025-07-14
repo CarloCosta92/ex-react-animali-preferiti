@@ -14,19 +14,56 @@
     <script type="text/babel">
         function Animali() {
 
-            const animals = ["cane", "gatto", "pecora"]
+
+
+            // const animals = ["cane", "gatto", "pecora"]
+
+            // return (
+            //     <details>
+
+            //         <summary>Animali</summary>
+            //         <ul>
+            //             {animals.map((animal, index) => <li key="index">{animal}
+            //             </li>)}
+
+            //         </ul>
+            //     </details>
+            // )
+            const { useState } = React;
+
+            const [animals, setAnimals] = useState([]);
+
+            const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
+
+            // funzione per aggiungere animali random
+            function addAnimal() {
+                const randomIndex = Math.floor(Math.random() * animalsChoices.length);
+                const newAnimal = animalsChoices[randomIndex];
+                setAnimals([...animals, newAnimal]);
+            }
 
             return (
-                <details>
+                <>
+                    <button onClick={addAnimal}>Aggiungi animale</button>
 
-                    <summary>Animali</summary>
-                    <ul>
-                        {animals.map((animal, index) => <li key="index">{animal}
-                        </li>)}
+                    <details>
+                        <summary>Animali</summary>
+                        <ul>
+                            {animals.map((animal, index) =>
+                                <li key="index">
+                                    {animal}
+                                </li>)}
 
-                    </ul>
-                </details>
+                        </ul>
+
+
+                    </details>
+
+                </>
             )
+
+
+
 
         }
 
