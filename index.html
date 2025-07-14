@@ -10,6 +10,37 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel" src="./script.js"></script>
+
+    <script type="text/babel">
+        function Animali() {
+
+            const animals = ["cane", "gatto", "pecora"]
+
+            return (
+                <details>
+
+                    <summary>Animali</summary>
+                    <ul>
+                        {animals.map((animal, index) => <li key="index">{animal}
+                        </li>)}
+
+                    </ul>
+                </details>
+            )
+
+        }
+
+    </script>
+
+    <!-- script per legarmi al componente -->
+    <script type="text/babel">
+        const { createRoot } = ReactDOM;
+        const listaAnimali = document.querySelector('.lista-animali');
+        const root = createRoot(listaAnimali);
+        root.render(<Animali />);
+    </script>
+
+
 </head>
 
 <body>
