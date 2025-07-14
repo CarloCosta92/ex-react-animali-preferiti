@@ -34,7 +34,7 @@ form {
 }
 
 img {
-    max-width: 100%;
+    max-width: 300px;
 }
 
 .lista-animali {
@@ -57,4 +57,10 @@ img {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
+}
+
+.card {
+    display: flex;
+    background-color: aqua;
+    padding: 20px;
 }
